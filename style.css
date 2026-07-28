@@ -1,34 +1,83 @@
+/* Gwiazdka oznacza regułę dla absolutnie każdego elementu na stronie */
 * {
+    /* Sprawia, że padding i obramowanie nie powiększają ustalonej szerokości elementu */
     box-sizing: border-box;
+    /* Resetuje domyślne marginesy zewnętrzne przeglądarki */
     margin: 0;
+    /* Resetuje domyślne marginesy wewnętrzne przeglądarki */
     padding: 0;
 }
 
+/* Styl dla głównego kontenera, który trzyma nasze trzy kolumny */
 .kontener-kolumn {
+    /* Włącza nowoczesny model układu Flexbox (elastyczne pudełka) */
     display: flex;
+    /* Domyślnie elementy w Flexbox układają się obok siebie w rzędzie (poziomo) */
+    flex-direction: row;
+    /* Kontener ma zajmować zawsze 100% szerokości dostępnego ekranu */
     width: 100%;
+    /* Minimalna wysokość to 100% wysokości okna przeglądarki (v-height) */
     min-height: 100vh;
 }
 
+/* Wspólne style aplikowane do każdej z trzech kolumn */
 .kolumna {
+    /* Dodaje 20 pikseli wolnej przestrzeni (oddechu) wewnątrz kolumny */
     padding: 20px;
+    /* Ustawia nowoczesną czcionkę bezszeryfową (np. Arial, Helvetica) */
     font-family: sans-serif;
 }
 
+/* Specyficzne cechy dla lewej kolumny */
 .lewa {
+    /* Zajmuje dokładnie 25% szerokości kontenera nadrzędnego */
     width: 25%;
+    /* Ustawia jasnoszare tło (zapis szesnastkowy HEX) */
     background-color: #f0f0f0;
+    /* Wyrównuje tekst wewnątrz do lewej krawędzi */
     text-align: left;
 }
 
+/* Specyficzne cechy dla środkowej kolumny */
 .srodkowa {
+    /* Zajmuje dokładnie połowę (50%) szerokości ekranu */
     width: 50%;
+    /* Ustawia nieco ciemniejsze szare tło */
     background-color: #e0e0e0;
+    /* Wyrównuje tekst wewnątrz do lewej krawędzi */
     text-align: left;
 }
 
+/* Specyficzne cechy dla prawej kolumny */
 .prawa {
+    /* Zajmuje pozostałe 25% szerokości */
     width: 25%;
+    /* Ustawia najciemniejsze szare tło z tej trójki */
     background-color: #d0d0d0;
+    /* Wyrównuje tekst wewnątrz do prawej krawędzi */
     text-align: right;
+}
+
+/* REGUŁA DLA MEDIÓW (MEDIA QUERY) - Odpowiedzialna za wersję mobilną */
+/* Działa jak instrukcja: "Jeśli szerokość ekranu wynosi maksymalnie 768px lub mniej..." */
+@media (max-width: 768px) {
+    
+    /* Nadpisujemy styl dla kontenera głównego na małych ekranach */
+    .kontener-kolumn {
+        /* Zmieniamy kierunek Flexbox z poziomego (row) na pionowy (column) */
+        /* Dzięki temu kolumny zaczną układać się jedna pod drugą */
+        flex-direction: column;
+    }
+
+    /* Nadpisujemy szerokości wszystkich trzech kolumn jednocześnie */
+    .lewa, .srodkowa, .prawa {
+        /* Na telefonie każda kolumna musi rozciągać się na całą szerokość ekranu */
+        width: 100%;
+    }
+    
+    /* Dodatkowa zmiana kosmetyczna specjalnie dla prawej kolumny na telefonie */
+    .prawa {
+        /* Na małym ekranie tekst wyrównany do prawej wygląda źle, zmieniamy na lewą */
+        text-align: left;
+    }
 }
