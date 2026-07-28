@@ -1,46 +1,77 @@
+<!-- Informuje przeglądarkę, że ten dokument to nowoczesny plik w formacie HTML5 -->
 <!DOCTYPE html>
+
+<!-- Główny znacznik otwierający kod HTML strony, ustawia język polski (dla wyszukiwarek i lektorów) -->
 <html lang="pl">
+
+<!-- Sekcja nagłówkowa - zawiera niewidoczne dla użytkownika informacje konfiguracyjne dla przeglądarki -->
 <head>
+    <!-- Ustawia kodowanie znaków na UTF-8, dzięki czemu na stronie poprawnie wyświetlają się polskie znaki (ą, ę, ś itp.) -->
     <meta charset="UTF-8">
+    
+    <!-- KLUCZOWA LINIA DLA SMARTFONÓW: dopasowuje szerokość strony do logicznej rozdzielczości ekranu urządzenia i ustawia zoom na 100% -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Tytuł strony wyświetlany na karcie w przeglądarce oraz w wynikach wyszukiwania Google -->
     <title>Trzy Kolumny - Nauka HTML/CSS</title>
     
-    <!-- To polecenie ładuje zewnętrzny plik CSS -->
+    <!-- Łączy ten plik HTML z zewnętrznym arkuszem stylów CSS. Dopisek ?v=2 to trik na czyszczenie pamięci cache w smartfonie -->
     <link rel="stylesheet" href="style.css?v=2">
+<!-- Zamyka sekcję konfiguracyjną head -->
 </head>
 
+<!-- Sekcja body - zawiera wszystko to, co fizycznie będzie widoczne dla użytkownika na ekranie komputera lub telefonu -->
 <body>
 
+    <!-- Główny kontener (pudełko), który dzięki klasie "kontener-kolumn" w CSS uruchamia mechanizm Flexbox dla elementów w środku -->
     <div class="kontener-kolumn">
-        <!-- Kolumna Lewa -->
-        <div id="lewa-id" class="kolumna lewa">Ładowanie...</div>
+        
+        <!-- Lewa kolumna: ma unikalne ID dla JavaScriptu oraz klasy wspólne ("kolumna") i dedykowane ("lewa") dla CSS -->
+        <!-- Słowo "Ładowanie..." zniknie w ułamku sekundy, gdy skrypt JavaScript wklei tu właściwy tekst z zewnętrznego pliku -->
+        <div id="lewa-id" class="kolumna lewa">Ładowanie lewej kolumny...</div>
 
-        <!-- Kolumna Środkowa -->
-        <div id="srodkowa-id" class="kolumna srodkowa">Ładowanie...</div>
+        <!-- Środkowa kolumna: analogiczna struktura, otrzyma styl szerokości 50% z pliku CSS -->
+        <div id="srodkowa-id" class="kolumna srodkowa">Ładowanie środkowej kolumny...</div>
 
-        <!-- Kolumna Prawa -->
-        <div id="prawa-id" class="kolumna prawa">Ładowanie...</div>
+        <!-- Prawa kolumna: otrzyma styl szerokości 25% oraz wyrównanie tekstu do prawej strony -->
+        <div id="prawa-id" class="kolumna prawa">Ładowanie prawej kolumny...</div>
+        
+    <!-- Zamyka główny kontener trzymający kolumny -->
     </div>
 
-    <!-- Prosty JavaScript, który tymczasowo (zanim wdrożysz PHP) 
-         pobierze zawartość plików i wklei ją do odpowiednich kolumn -->
+    <!-- Sekcja skryptu JavaScript - pozwala na dynamiczne i asynchroniczne modyfikowanie zawartości strony bez przeładowania -->
     <script>
+        // Definiujemy funkcję o nazwie "wczytajKolumne", która przyjmuje dwa parametry: ID miejsca docelowego oraz nazwę pliku źródłowego
         function wczytajKolumne(idElementu, nazwaPliku) {
+            
+            // Funkcja fetch wysyła w tle zapytanie do serwera po wskazany plik HTML
             fetch(nazwaPliku)
+                
+                // Gdy serwer odpowie, ta linia zamienia surową odpowiedź sieciową na czysty tekst
                 .then(response => response.text())
+                
+                // Gdy tekst jest gotowy (zmienna "data"), ta linia odnajduje na stronie element o podanym ID i wstrzykuje do niego ten tekst
                 .then(data => {
                     document.getElementById(idElementu).innerHTML = data;
                 })
+                
+                // Blok awaryjny: jeśli plik nie istnieje lub wystąpi błąd sieci, zamiast pustego miejsca wyświetli się komunikat o błędzie
                 .catch(error => {
                     document.getElementById(idElementu).innerHTML = "Błąd ładowania pliku.";
                 });
         }
 
-        // Wywołanie funkcji dla każdej kolumny
+        // Wywołujemy stworzoną wyżej funkcję po raz pierwszy: szukamy elementu 'lewa-id' i wklejamy do niego treść z pliku 'kolumna_lewa.html'
         wczytajKolumne('lewa-id', 'kolumna_lewa.html');
+        
+        // Wywołujemy funkcję dla środkowej kolumny
         wczytajKolumne('srodkowa-id', 'kolumna_srodkowa.html');
+        
+        // Wywołujemy funkcję dla prawej kolumny
         wczytajKolumne('prawa-id', 'kolumna_prawa.html');
     </script>
 
+<!-- Zamyka sekcję body -->
 </body>
+<!-- Zamyka cały dokument HTML -->
 </html>
