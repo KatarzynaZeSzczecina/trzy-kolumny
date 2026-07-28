@@ -49,35 +49,50 @@
 }
 
 /* Specyficzne cechy dla prawej kolumny */
+/* ... [tutaj zostawiasz górę pliku bez zmian, aż do klasy .prawa] ... */
+
 .prawa {
-    /* Zajmuje pozostałe 25% szerokości */
     width: 25%;
-    /* Ustawia najciemniejsze szare tło z tej trójki */
     background-color: #d0d0d0;
-    /* Wyrównuje tekst wewnątrz do prawej krawędzi */
     text-align: right;
+    /* NOWOŚĆ: Domyślnie ukrywamy prawą kolumnę na wszystkich "standardowych" ekranach i smartfonach */
+    display: none; 
 }
 
-/* REGUŁA DLA MEDIÓW (MEDIA QUERY) - Odpowiedzialna za wersję mobilną */
-/* Działa jak instrukcja: "Jeśli szerokość ekranu wynosi maksymalnie 768px lub mniej..." */
-@media (max-width: 768px) {
-    
-    /* Nadpisujemy styl dla kontenera głównego na małych ekranach */
-    .kontener-kolumn {
-        /* Zmieniamy kierunek Flexbox z poziomego (row) na pionowy (column) */
-        /* Dzięki temu kolumny zaczną układać się jedna pod drugą */
-        flex-direction: column;
+/* NOWOŚĆ: Dopasowanie dla standardowych monitorów i laptopów (od 769px do 1920px) */
+/* Skoro prawej kolumny nie ma, rozdzielamy wolną przestrzeń między lewą a środkową */
+@media (min-width: 769px) and (max-width: 1920px) {
+    .lewa {
+        width: 33.33%; /* Lewa zajmuje 1/3 ekranu */
     }
+    .srodkowa {
+        width: 66.67%; /* Środkowa zajmuje 2/3 ekranu */
+    }
+}
 
-    /* Nadpisujemy szerokości wszystkich trzech kolumn jednocześnie */
-    .lewa, .srodkowa, .prawa {
-        /* Na telefonie każda kolumna musi rozciągać się na całą szerokość ekranu */
-        width: 100%;
+/* REGUŁA DLA MONITORÓW ULTRA-WIDE / DUŻYCH (powyżej 1920px) */
+/* "Jeśli ekran jest szerszy niż 1920px, przywróć pierwotny układ z trzema kolumnami" */
+@media (min-width: 1921px) {
+    .lewa {
+        width: 25%;
     }
-    
-    /* Dodatkowa zmiana kosmetyczna specjalnie dla prawej kolumny na telefonie */
+    .srodkowa {
+        width: 50%;
+    }
     .prawa {
-        /* Na małym ekranie tekst wyrównany do prawej wygląda źle, zmieniamy na lewą */
-        text-align: left;
+        /* Przywracamy widoczność prawej kolumny i włączamy ją z powrotem do Flexboxa */
+        display: block; 
+        width: 25%;
+    }
+}
+
+/* REGUŁA DLA SMARTFONÓW (do 768px) - zostaje prawie bez zmian */
+@media (max-width: 768px) {
+    .kontener-kolumn {
+        flex-direction: column; /* Układ pionowy */
+    }
+    /* Prawej kolumny i tak nie ma (bo display: none), więc stylizujemy tylko lewą i środkową */
+    .lewa, .srodkowa {
+        width: 100%; /* Na telefonie rozciągają się na całą szerokość */
     }
 }
