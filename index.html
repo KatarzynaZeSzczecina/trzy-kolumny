@@ -4,47 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trzy Kolumny - Nauka HTML/CSS</title>
-    <style>
-        /* Reset podstawowych marginesów */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Kontener dla kolumn - używamy Flexbox */
-        .kontener-kolumn {
-            display: flex;
-            width: 100%;
-            min-height: 100vh; /* Wysokość na cały ekran */
-        }
-
-        /* Wspólne style dla wszystkich kolumn */
-        .kolumna {
-            padding: 20px;
-            font-family: sans-serif;
-        }
-
-        /* Definicje szerokości i wyrównania tekstów */
-        .lewa {
-            width: 25%;
-            background-color: #f0f0f0; /* Kolor tła, abyś widział granice */
-            text-align: left;          /* Przyklejony do lewej */
-        }
-
-        .srodkowa {
-            width: 50%;
-            background-color: #e0e0e0;
-            text-align: left;          /* Przyklejony do lewej */
-        }
-
-        .prawa {
-            width: 25%;
-            background-color: #d0d0d0;
-            text-align: right;         /* Przyklejony do prawej */
-        }
-    </style>
+    
+    <!-- To polecenie ładuje zewnętrzny plik CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="kontener-kolumn">
